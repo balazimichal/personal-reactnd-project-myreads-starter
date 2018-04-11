@@ -21,6 +21,7 @@ class BooksApp extends React.Component {
       })
   }
 
+/*
   updateBook = (books) => {
     this.setState((currentState) => ({
       books: currentState.books.filter((b) => {
@@ -30,7 +31,7 @@ class BooksApp extends React.Component {
 
     BooksAPI.update(books)
   }
-
+*/
   render() {
     return (
       <div className="app">
