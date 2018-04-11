@@ -21,6 +21,16 @@ class BooksApp extends React.Component {
       })
   }
 
+  updateBook = (books) => {
+    this.setState((currentState) => ({
+      books: currentState.books.filter((b) => {
+        return b.id !== books.id
+      })
+    }))
+
+    BooksAPI.update(books)
+  }
+
   render() {
     return (
       <div className="app">
