@@ -10,9 +10,20 @@ class SearchBooks extends Component {
   }
   updateQuery = (query) => {
     this.setState(() => ({
-      query: query
+      query
     }))
-    BooksAPI.search(this.state.query)
+
+    // not working like this
+    this.searchBooks(this.state.query);
+  }
+
+  
+  componentDidMount() {
+    this.searchBooks('artificial');
+  }
+
+  searchBooks(query) {
+    BooksAPI.search(query)
       .then((books) => {
         this.setState(() => ({
           books
@@ -20,14 +31,11 @@ class SearchBooks extends Component {
       })
   }
 
-  componentDidMount() {
-    BooksAPI.search('artificial')
-      .then((books) => {
-        this.setState(() => ({
-          books
-        }))
-      })
-  }
+
+
+
+
+  
   render() {
     /*
     const showingBooks = this.state.query === ''
@@ -35,7 +43,15 @@ class SearchBooks extends Component {
       : this.props.books.filter((b) => (
         b.title.toLowerCase().includes(this.state.query.toLowerCase())
       ))
-      */
+
+
+    const showingBooks = this.state.query === ''
+    ? this.searchBooks('artificial')
+    : this.searchBooks(this.state.query)
+          */
+
+
+
     return(
       <div className="search-books">
 
@@ -56,8 +72,8 @@ class SearchBooks extends Component {
               type="text"
               placeholder="Search by title or author"
               value={this.state.query}
-              onChange={(event)=> this.updateQuery(event.target.value)}
-            />
+              onChange={(event) => this.updateQuery(event.target.value)}
+          />
 
           </div>
         </div>
