@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import * as BooksAPI from './BooksAPI'
 import { Link } from 'react-router-dom'
+import SingleBook from './SingleBook.js'
 
 class SearchBooks extends Component {
   state = {
@@ -8,10 +8,16 @@ class SearchBooks extends Component {
   }
   updateQuery = (query) => {
     this.setState(() => ({
-      query: query.trim()
+      query: query
     }))
   }
   render() {
+
+    const showingBooks = this.state.query === ''
+      ? this.props.books
+      : this.props.books.filter((b) => (
+        b.title.toLowerCase().includes(this.state.query.toLowerCase())
+      ))
 
     return(
       <div className="search-books">
@@ -40,7 +46,11 @@ class SearchBooks extends Component {
         </div>
         <div className="search-books-results">
           <ol className="books-grid">
-
+            {showingBooks.map((book) => {
+                return (
+                  <SingleBook key={book.id} title={book.title} authors={book.authors} image={book.imageLinks.smallThumbnail} />
+                )
+            })}
           </ol>
         </div>
       </div>
