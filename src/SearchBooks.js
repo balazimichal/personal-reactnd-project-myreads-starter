@@ -1,24 +1,41 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import SingleBook from './SingleBook.js'
+import * as BooksAPI from './BooksAPI'
 
 class SearchBooks extends Component {
   state = {
-    query: ''
+    query: '',
+    books: []
   }
   updateQuery = (query) => {
     this.setState(() => ({
       query: query
     }))
+    BooksAPI.search(this.state.query)
+      .then((books) => {
+        this.setState(() => ({
+          books
+        }))
+      })
+  }
+
+  componentDidMount() {
+    BooksAPI.search('artificial')
+      .then((books) => {
+        this.setState(() => ({
+          books
+        }))
+      })
   }
   render() {
-
+    /*
     const showingBooks = this.state.query === ''
       ? this.props.books
       : this.props.books.filter((b) => (
         b.title.toLowerCase().includes(this.state.query.toLowerCase())
       ))
-
+      */
     return(
       <div className="search-books">
 
@@ -46,7 +63,7 @@ class SearchBooks extends Component {
         </div>
         <div className="search-books-results">
           <ol className="books-grid">
-            {showingBooks.map((book) => {
+            {this.state.books.map((book) => {
                 return (
                   <SingleBook key={book.id} book={book} />
                 )
