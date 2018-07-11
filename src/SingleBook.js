@@ -8,6 +8,9 @@ class SingleBook extends Component {
       this.setState(() => ({
         books
       }))
+      console.log('book id: ', book)
+      console.log('shelf: ', shelf)
+      console.log('BooksAPI response: ', books)
     })
   }
 
