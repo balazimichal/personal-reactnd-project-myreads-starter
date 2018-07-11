@@ -4,10 +4,14 @@ import * as BooksAPI from './BooksAPI'
 class SingleBook extends Component {
 
   changeShelf = (book, shelf) => {
-    console.log(book);
-    console.log(shelf);
-    BooksAPI.update(book, shelf);
-  };
+    BooksAPI.update(book, shelf).then((books) => {
+      this.setState(() => ({
+        books
+      }))
+    })
+  }
+
+
 
   render(){
     return(
