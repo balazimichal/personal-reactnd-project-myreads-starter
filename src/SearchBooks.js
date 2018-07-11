@@ -14,12 +14,14 @@ class SearchBooks extends Component {
     }))
 
     // not working like this
-    this.searchBooks(this.state.query);
+    if (this.state.query && this.state.query.length > 0) {
+      this.searchBooks(this.state.query);
+    }
   }
 
   
   componentDidMount() {
-    this.searchBooks('artificial');
+      this.searchBooks('artificial')
   }
 
   searchBooks(query) {
@@ -29,6 +31,7 @@ class SearchBooks extends Component {
           books
         }))
       })
+      
   }
 
 
@@ -37,18 +40,7 @@ class SearchBooks extends Component {
 
   
   render() {
-    /*
-    const showingBooks = this.state.query === ''
-      ? this.props.books
-      : this.props.books.filter((b) => (
-        b.title.toLowerCase().includes(this.state.query.toLowerCase())
-      ))
 
-
-    const showingBooks = this.state.query === ''
-    ? this.searchBooks('artificial')
-    : this.searchBooks(this.state.query)
-          */
 
 
 
@@ -79,7 +71,7 @@ class SearchBooks extends Component {
         </div>
         <div className="search-books-results">
           <ol className="books-grid">
-            {this.state.books.map((book) => {
+            {this.state.books.length > 0 && this.state.books.map((book) => {
                 return (
                   <SingleBook key={book.id} book={book} />
                 )
