@@ -22,7 +22,7 @@ class ListBooks extends Component {
                   {this.props.books.map((book) => {
                     if(book.shelf === 'currentlyReading'){
                       return (
-                        <SingleBook key={book.id} book={book} />
+                        <SingleBook key={book.id} book={book} changeShelf={this.props.changeShelf} />
                       )
                     }
                   })}
@@ -36,7 +36,7 @@ class ListBooks extends Component {
                   {this.props.books.map((book) => {
                     if(book.shelf === 'wantToRead'){
                       return (
-                        <SingleBook key={book.id} book={book} />
+                        <SingleBook key={book.id} book={book} changeShelf={this.props.changeShelf} />
                       )
                     }
                   })}
@@ -50,7 +50,7 @@ class ListBooks extends Component {
                   {this.props.books.map((book) => {
                     if(book.shelf === 'read'){
                       return (
-                        <SingleBook key={book.id} book={book} />
+                        <SingleBook key={book.id} book={book} changeShelf={this.props.changeShelf} />
                       )
                     }
                   })}

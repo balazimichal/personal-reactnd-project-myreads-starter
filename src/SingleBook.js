@@ -3,16 +3,7 @@ import * as BooksAPI from './BooksAPI'
 
 class SingleBook extends Component {
 
-  changeShelf = (book, shelf) => {
-    BooksAPI.update(book, shelf).then((books) => {
-      this.setState(() => ({
-        books
-      }))
-      console.log('book id: ', book)
-      console.log('shelf: ', shelf)
-      console.log('BooksAPI response: ', books)
-    })
-  }
+
 
 
 
@@ -25,7 +16,7 @@ class SingleBook extends Component {
             <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${this.props.book.imageLinks.smallThumbnail})` }}></div>
 
             <div className="book-shelf-changer">
-              <select onChange={(event) => this.changeShelf(this.props.book.id, event.target.value)} value={this.props.book.shelf || 'none'}>
+              <select onChange={(event) => this.props.changeShelf(this.props.book, event.target.value)} value={this.props.book.shelf || 'none'}>
                 <option value="none" disabled>Move to...</option>
                 <option value="currentlyReading">Currently Reading</option>
                 <option value="wantToRead">Want to Read</option>
