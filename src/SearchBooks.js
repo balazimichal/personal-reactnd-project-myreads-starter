@@ -42,8 +42,6 @@ class SearchBooks extends Component {
   render() {
 
 
-
-
     return(
       <div className="search-books">
 
@@ -73,7 +71,7 @@ class SearchBooks extends Component {
           <ol className="books-grid">
             {this.state.books.length > 0 && this.state.books.map((book) => {
                 return (
-                  <SingleBook key={book.id} book={book} />
+                  <SingleBook key={book.id} book={book} changeShelf={this.props.changeShelf} />
                 )
             })}
           </ol>

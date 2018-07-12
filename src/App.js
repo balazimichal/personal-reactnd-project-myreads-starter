@@ -22,6 +22,8 @@ class BooksApp extends React.Component {
   }
 
 
+
+
   
   changeShelf = (book, shelf) => {
     console.log('book id: ', book)
@@ -30,19 +32,52 @@ class BooksApp extends React.Component {
 
       if (updateShelf) {
         console.log('state updated')
-        this.setState((prevState) => ({
-          //books : updateShelf
 
-          books : prevState.books.filter((b) => {
-            if (book.id === b.id ) {
-              book.shelf = shelf
-              return b
-            } else {
-              return b
-            }
-          })
+        if (this.state.books.indexOf(book) > -1) {
 
-        }))
+          console.log('book exists')
+          this.setState((prevState) => ({
+
+            books: prevState.books.filter((b) => {
+
+              if (book.id === b.id) {
+                book.shelf = shelf
+                return b
+              } else {
+                return b
+              }
+
+            })
+          }))
+
+        } else {
+          console.log('book does not exist:', book)
+          console.log(this.state.books)
+          this.setState((prevState) => ({
+
+            books: prevState.books.concat(book)
+
+
+          }))
+          console.log(this.state.books)
+          
+        }
+
+
+
+
+
+
+
+
+
+
+          
+
+
+
+
+
       }
 
     })
@@ -53,10 +88,10 @@ class BooksApp extends React.Component {
     return (
       <div className="app">
           <Route exact path='/' render={() => (
-          <ListBooks books={this.state.books} changeShelf={this.changeShelf} />
+            <ListBooks books={this.state.books} changeShelf={this.changeShelf} />
           )} />
           <Route path='/search' render={() => (
-            <SearchBooks books={this.state.books} />
+            <SearchBooks books={this.state.books} changeShelf={this.changeShelf}  />
           )} />
       </div>
     )
