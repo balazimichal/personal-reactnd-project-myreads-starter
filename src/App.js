@@ -53,6 +53,7 @@ class BooksApp extends React.Component {
         } else {
           console.log('book does not exist:', book)
           console.log(this.state.books)
+          book.shelf = shelf
           this.setState((prevState) => ({
 
             books: prevState.books.concat(book)
@@ -62,20 +63,6 @@ class BooksApp extends React.Component {
           console.log(this.state.books)
           
         }
-
-
-
-
-
-
-
-
-
-
-          
-
-
-
 
 
       }
