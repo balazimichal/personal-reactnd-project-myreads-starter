@@ -7,14 +7,25 @@ import * as BooksAPI from './BooksAPI'
 class SearchBooks extends Component {
   state = {
     query: '',
-    books: []
+    books: [],
+    searchBooks: []
   }
+
+
+  componentDidMount() {
+    this.setState(() => ({
+      books: this.props.books
+    }))
+  }
+
+
+
   updateQuery = (query) => {
     this.setState(() => ({
       query
     }), () => {
         this.searchBooks(this.state.query)
-        console.log(this.state.query)
+        //console.log(this.state.query)
     })
 
   }
@@ -25,14 +36,32 @@ class SearchBooks extends Component {
   searchBooks(query) {
     if (query !== '') {
       BooksAPI.search(query)
-        .then((books) => {
+        .then((searchBooks) => {
+          // TODO: reconcile two states searchBooks and books
+          if(searchBooks.length > 0) {
+            this.state.books.filter((book) => {
+              searchBooks.filter((b) => {
+
+                if (b.id === book.id) {
+                  b.shelf = book.shelf
+                  console.log(b.id, b.shelf, book.shelf)
+                }
+              })
+
+
+            })
+          }
+
+
+
+
           this.setState(() => ({
-            books
+            searchBooks: searchBooks
           }))
         })
     } else {
       this.setState(() => ({
-        books : ''
+        searchBooks : ''
       }))
     }
   }
@@ -75,9 +104,10 @@ class SearchBooks extends Component {
         </div>
         <div className="search-books-results">
           <ol className="books-grid">
-            {this.state.books && this.state.books.length > 0 && this.state.books.map((book) => {
+
+            {this.state.searchBooks && this.state.searchBooks.length > 0 && this.state.searchBooks.map((searchBook) => {
                 return (
-                  <SingleBook key={book.id} book={book} changeShelf={this.props.changeShelf} />
+                  <SingleBook key={searchBook.id} book={searchBook} changeShelf={this.props.changeShelf} />
                 )
             })}
           </ol>

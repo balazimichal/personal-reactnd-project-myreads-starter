@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import * as BooksAPI from './BooksAPI'
 
 class SingleBook extends Component {
 
@@ -8,7 +7,10 @@ class SingleBook extends Component {
 
 
   render(){
+
     return(
+
+
       <li>
         <div className="book">
           <div className="book-top">

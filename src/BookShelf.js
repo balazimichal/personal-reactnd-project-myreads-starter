@@ -7,9 +7,9 @@ class BookShelf extends Component {
 
             <div className="bookshelf">
                 <h2 className="bookshelf-title">
-                    {this.props.shelf == 'currentlyReading' && 'Currently reading'}
-                    {this.props.shelf == 'wantToRead' && 'Want to read'}
-                    {this.props.shelf == 'read' && 'Read'}
+                    {this.props.shelf === 'currentlyReading' && 'Currently reading'}
+                    {this.props.shelf === 'wantToRead' && 'Want to read'}
+                    {this.props.shelf === 'read' && 'Read'}
                  </h2>
                 <div className="bookshelf-books">
                     <ol className="books-grid">
