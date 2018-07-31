@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import SingleBook from './SingleBook.js'
 import * as BooksAPI from './BooksAPI'
 
+
 class SearchBooks extends Component {
   state = {
     query: '',
@@ -11,27 +12,33 @@ class SearchBooks extends Component {
   updateQuery = (query) => {
     this.setState(() => ({
       query
-    }))
+    }), () => {
+        this.searchBooks(this.state.query)
+        console.log(this.state.query)
+    })
 
-    // not working like this
-    if (this.state.query && this.state.query.length > 0) {
-      this.searchBooks(this.state.query);
-    }
+
+
+
+
   }
 
   
-  componentDidMount() {
-      this.searchBooks('artificial')
-  }
+
 
   searchBooks(query) {
-    BooksAPI.search(query)
-      .then((books) => {
-        this.setState(() => ({
-          books
-        }))
-      })
-      
+    if (query !== '') {
+      BooksAPI.search(query)
+        .then((books) => {
+          this.setState(() => ({
+            books
+          }))
+        })
+    } else {
+      this.setState(() => ({
+        books : ''
+      }))
+    }
   }
 
 
@@ -58,18 +65,21 @@ class SearchBooks extends Component {
               However, remember that the BooksAPI.search method DOES search by title or author. So, don't worry if
               you don't find a specific author or title. Every search is limited by search terms.
             */}
-            <input
-              type="text"
-              placeholder="Search by title or author"
-              value={this.state.query}
-              onChange={(event) => this.updateQuery(event.target.value)}
-          />
+
+              <input
+                type="text"
+                placeholder="Search by title or author"
+                value={this.state.query}
+                onChange={(event) => this.updateQuery(event.target.value)}
+              />
+
+
 
           </div>
         </div>
         <div className="search-books-results">
           <ol className="books-grid">
-            {this.state.books.length > 0 && this.state.books.map((book) => {
+            {this.state.books && this.state.books.length > 0 && this.state.books.map((book) => {
                 return (
                   <SingleBook key={book.id} book={book} changeShelf={this.props.changeShelf} />
                 )
