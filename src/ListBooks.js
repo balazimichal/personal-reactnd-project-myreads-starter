@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import SingleBook from './SingleBook.js'
+import BookShelf from './BookShelf.js'
 
 
 class ListBooks extends Component {
   render() {
-    console.log(this.props.books)
     return (
-      //const books = this.props.books
+
 
       <div className="list-books">
         <div className="list-books-title">
@@ -15,48 +15,9 @@ class ListBooks extends Component {
         </div>
         <div className="list-books-content">
           <div>
-            <div className="bookshelf">
-              <h2 className="bookshelf-title">Currently Reading</h2>
-              <div className="bookshelf-books">
-                <ol className="books-grid">
-                  {this.props.books.map((book) => {
-                    if(book.shelf === 'currentlyReading'){
-                      return (
-                        <SingleBook key={book.id} book={book} changeShelf={this.props.changeShelf} />
-                      )
-                    }
-                  })}
-                </ol>
-              </div>
-            </div>
-            <div className="bookshelf">
-              <h2 className="bookshelf-title">Want to Read</h2>
-              <div className="bookshelf-books">
-                <ol className="books-grid">
-                  {this.props.books.map((book) => {
-                    if(book.shelf === 'wantToRead'){
-                      return (
-                        <SingleBook key={book.id} book={book} changeShelf={this.props.changeShelf} />
-                      )
-                    }
-                  })}
-                </ol>
-              </div>
-            </div>
-            <div className="bookshelf">
-              <h2 className="bookshelf-title">Read</h2>
-              <div className="bookshelf-books">
-                <ol className="books-grid">
-                  {this.props.books.map((book) => {
-                    if(book.shelf === 'read'){
-                      return (
-                        <SingleBook key={book.id} book={book} changeShelf={this.props.changeShelf} />
-                      )
-                    }
-                  })}
-                </ol>
-              </div>
-            </div>
+            <BookShelf books={this.props.books} shelf={'currentlyReading'} />
+            <BookShelf books={this.props.books} shelf={'wantToRead'} />
+            <BookShelf books={this.props.books} shelf={'read'} />
           </div>
         </div>
         <div className="open-search">

@@ -17,10 +17,6 @@ class SearchBooks extends Component {
         console.log(this.state.query)
     })
 
-
-
-
-
   }
 
   
