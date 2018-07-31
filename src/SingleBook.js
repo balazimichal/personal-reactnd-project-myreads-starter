@@ -15,7 +15,7 @@ class SingleBook extends Component {
         <div className="book">
           <div className="book-top">
 
-            <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${this.props.book.imageLinks.smallThumbnail})` }}></div>
+            <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${this.props.book.imageLinks !== undefined ? this.props.book.imageLinks.smallThumbnail : ''})` }}></div>
 
             <div className="book-shelf-changer">
               <select onChange={(event) => this.props.changeShelf(this.props.book, event.target.value)} value={this.props.book.shelf || 'none'}>
