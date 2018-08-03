@@ -4,6 +4,7 @@ import SingleBook from './SingleBook.js'
 import * as BooksAPI from './BooksAPI'
 
 
+
 class SearchBooks extends Component {
   state = {
     query: '',
@@ -24,8 +25,11 @@ class SearchBooks extends Component {
     this.setState(() => ({
       query
     }), () => {
+
         this.searchBooks(this.state.query)
-        //console.log(this.state.query)
+        console.log(this.state.query)
+
+
     })
 
   }
@@ -35,6 +39,7 @@ class SearchBooks extends Component {
 
   searchBooks(query) {
     if (query !== '') {
+
       BooksAPI.search(query)
         .then((searchBooks) => {
           // TODO: reconcile two states searchBooks and books
@@ -59,6 +64,7 @@ class SearchBooks extends Component {
             searchBooks: searchBooks
           }))
         })
+        
     } else {
       this.setState(() => ({
         searchBooks : ''
